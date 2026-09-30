@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./components/Login";
 
+// Admin
 import Dashboard from "./components/Dashboard";
 import Books from "./components/Books";
 import Students from "./components/Students";
@@ -9,6 +10,7 @@ import IssueBook from "./components/IssueBook";
 import ReturnBook from "./components/ReturnBook";
 import FinePayment from "./components/FinePayment";
 
+// Student
 import StudentDashboard from "./components/StudentDashboard";
 import BrowseBooks from "./components/BrowseBooks";
 import MyBooks from "./components/MyBooks";
@@ -24,15 +26,42 @@ function App() {
                 {/* Login */}
                 <Route path="/" element={<Login />} />
 
-                {/* Admin Pages */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/books" element={<Books />} />
-                <Route path="/students" element={<Students />} />
-                <Route path="/issue-book" element={<IssueBook />} />
-                <Route path="/return-book" element={<ReturnBook />} />
-                <Route path="/fine-payment" element={<FinePayment />} />
 
-                {/* Student Pages */}
+                {/* ================= ADMIN ================= */}
+
+                <Route
+                    path="/dashboard"
+                    element={<Dashboard />}
+                />
+
+                <Route
+                    path="/books"
+                    element={<Books />}
+                />
+
+                <Route
+                    path="/students"
+                    element={<Students />}
+                />
+
+                <Route
+                    path="/issue-book"
+                    element={<IssueBook />}
+                />
+
+                <Route
+                    path="/return-book"
+                    element={<ReturnBook />}
+                />
+
+                <Route
+                    path="/fine-payment"
+                    element={<FinePayment />}
+                />
+
+
+                {/* ================= STUDENT ================= */}
+
                 <Route
                     path="/student-dashboard"
                     element={<StudentDashboard />}

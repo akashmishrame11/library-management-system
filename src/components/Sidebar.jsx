@@ -1,9 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-
     const menuItems = [
         {
             name: "Dashboard",
@@ -18,7 +16,7 @@ const Sidebar = () => {
         {
             name: "Students",
             path: "/students",
-            icon: "👨‍🎓",
+            icon: "🧑‍🎓",
         },
         {
             name: "Issue Book",
@@ -38,112 +36,72 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside
-            className="
-                fixed left-0 top-0 z-50
-                h-screen w-64
-                bg-slate-950 text-white
-                flex flex-col
-                shadow-xl
-            "
-        >
+        <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-[#0b1225] text-white flex flex-col">
 
-            {/* Logo */}
-            <div className="px-6 py-6 border-b border-slate-800 shrink-0">
-
+            {/* Logo / Header */}
+            <div className="px-6 py-5 border-b border-white/10 shrink-0">
                 <h1 className="text-xl font-bold leading-7">
                     Library Management
                     <br />
-                    <span className="text-blue-400">System</span>
+                    System
                 </h1>
 
-                <p className="text-xs text-slate-400 mt-2">
-                    Library Admin Panel
+                <p className="text-blue-400 text-sm mt-1">
+                    Admin Panel
                 </p>
-
             </div>
 
+            {/* Menu */}
+            <nav className="flex-1 px-3 py-5 overflow-y-auto sidebar-scroll">
 
-            {/* Scrollable Menu */}
-            <nav
-                className="
-                    flex-1
-                    min-h-0
-                    overflow-y-auto
-                    px-4 py-5
-                    space-y-2
+                <div className="space-y-2">
 
-                    scrollbar-thin
-                    scrollbar-thumb-slate-700
-                    scrollbar-track-transparent
-                "
-            >
-
-                {menuItems.map((item) => {
-
-                    const isActive = location.pathname === item.path;
-
-                    return (
-                        <button
+                    {menuItems.map((item) => (
+                        <NavLink
                             key={item.path}
-                            onClick={() => navigate(item.path)}
-                            className={`
-                                w-full
-                                flex items-center gap-3
-                                px-4 py-3
-                                rounded-xl
-                                text-left
-                                transition-all duration-200
-
+                            to={item.path}
+                            className={({ isActive }) =>
+                                `flex items-center gap-4 px-4 py-4 rounded-xl
+                                font-medium transition-all duration-200
                                 ${
                                     isActive
                                         ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                                        : "text-slate-300 hover:bg-slate-800 hover:text-white hover:translate-x-1"
-                                }
-                            `}
+                                        : "text-gray-200 hover:bg-white/10 hover:text-white"
+                                }`
+                            }
                         >
-
-                            <span className="text-lg">
+                            <span className="text-xl w-7 text-center">
                                 {item.icon}
                             </span>
 
-                            <span className="font-medium">
+                            <span>
                                 {item.name}
                             </span>
+                        </NavLink>
+                    ))}
 
-                        </button>
-                    );
-                })}
+                </div>
 
             </nav>
 
-
             {/* Logout */}
-            <div className="px-4 py-4 border-t border-slate-800 shrink-0">
+            <div className="px-3 py-4 border-t border-white/10 shrink-0">
 
-                <button
-                    onClick={() => navigate("/")}
-                    className="
-                        w-full
-                        flex items-center gap-3
-                        px-4 py-3
-                        rounded-xl
-                        text-slate-300
-                        hover:bg-red-500/15
-                        hover:text-red-400
-                        transition-all duration-200
-                    "
+                <NavLink
+                    to="/"
+                    className="flex items-center gap-4 px-4 py-4 rounded-xl
+                    text-gray-200 font-medium
+                    hover:bg-red-500/10 hover:text-red-400
+                    transition-all duration-200"
                 >
-
-                    <span className="text-lg">
+                    <span className="text-xl w-7 text-center">
                         🚪
                     </span>
 
-                    <span className="font-medium">
+                    <span>
                         Logout
                     </span>
-
-                </button>
+                </NavLink>
 
             </div>
 

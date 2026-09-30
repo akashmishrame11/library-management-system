@@ -1,80 +1,62 @@
+import { useEffect, useState } from "react";
+
 const Navbar = () => {
 
+    const [admin, setAdmin] = useState({
+        name: "Admin",
+    });
+
+    useEffect(() => {
+
+        const data = sessionStorage.getItem("user");
+
+        if (data) {
+            const user = JSON.parse(data);
+
+            setAdmin({
+                name: user.name || "Admin",
+            });
+        }
+
+    }, []);
+
     return (
+        <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-20">
 
-        <header className="fixed lg:static top-0 left-0 right-0 z-30 h-16 lg:h-20 bg-white border-b border-slate-200 shadow-sm">
+            {/* LEFT */}
+            <div className="pl-14 lg:pl-0">
 
-            <div className="h-full flex items-center justify-between px-4 sm:px-6 lg:px-8 pl-16 lg:pl-8">
+                <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                    Dashboard
+                </h1>
+
+            </div>
 
 
-                {/* Page Title */}
+            {/* RIGHT */}
+            <div className="flex items-center gap-3 sm:gap-4">
 
-                <div>
+                <div className="hidden sm:block text-right">
 
-                    <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
-                        Dashboard
-                    </h2>
+                    <p className="text-sm font-medium text-gray-800">
+                        {admin.name}
+                    </p>
 
-                    <p className="hidden sm:block text-xs text-slate-400 mt-0.5">
-                        Library Management System
+                    <p className="text-xs text-gray-500">
+                        Administrator
                     </p>
 
                 </div>
 
 
-                {/* Right Section */}
-
-                <div className="flex items-center gap-3 sm:gap-4">
-
-
-                    {/* Notification */}
-
-                    <button
-                        className="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-lg text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition"
-                        title="Notifications"
-                    >
-                        🔔
-                    </button>
-
-
-                    {/* Divider */}
-
-                    <div className="hidden sm:block h-8 w-px bg-slate-200"></div>
-
-
-                    {/* Admin */}
-
-                    <div className="flex items-center gap-3">
-
-                        <div className="hidden sm:block text-right">
-
-                            <p className="text-sm font-semibold text-slate-700">
-                                Admin
-                            </p>
-
-                            <p className="text-xs text-slate-400">
-                                Administrator
-                            </p>
-
-                        </div>
-
-
-                        <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-600/20">
-                            A
-                        </div>
-
-                    </div>
-
-
+                <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold shadow-sm">
+                    {admin.name.charAt(0).toUpperCase()}
                 </div>
-
 
             </div>
 
         </header>
-
     );
-
 };
 
 export default Navbar;
